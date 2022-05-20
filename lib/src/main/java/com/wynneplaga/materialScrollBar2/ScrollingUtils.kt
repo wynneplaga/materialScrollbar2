@@ -146,7 +146,7 @@ internal class ScrollingUtilities(private val materialScrollBar: MaterialScrollB
             val visibleHeight: Int = materialScrollBar.recyclerView.height
             val localAdapter = adapter
             val scrollHeight = if (localAdapter is ICustomScroller) {
-                materialScrollBar.recyclerView.paddingTop + localAdapter.totalDepth + materialScrollBar.recyclerView.paddingBottom
+                materialScrollBar.recyclerView.paddingTop + localAdapter.getTotalDepth() + materialScrollBar.recyclerView.paddingBottom
             } else {
                 materialScrollBar.recyclerView.paddingTop + totalRowCount * scrollPosState.rowHeight + materialScrollBar.recyclerView.paddingBottom
             }
