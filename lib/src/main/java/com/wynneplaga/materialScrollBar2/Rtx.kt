@@ -27,7 +27,7 @@ fun Resources.Theme.resolveAttribute(resid: Int): TypedValue {
 
 @ColorInt
 fun Context.getAccentColor(): Int {
-    return theme.resolveAttribute(androidx.appcompat.R.attr.colorAccent).data
+    return theme.resolveAttribute(R.attr.colorAccent).data
 }
 
 operator fun StringBuilder.plusAssign(string: String) {

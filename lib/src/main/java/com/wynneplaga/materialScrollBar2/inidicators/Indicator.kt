@@ -24,6 +24,7 @@ sealed class Indicator(
     protected abstract val indicatorHeight: Int
     protected abstract val indicatorWidth: Int
 
+    internal var touchDownY: Float = 0f
     private val textView: TextView = TextView(context)
 
     init {
@@ -59,7 +60,7 @@ sealed class Indicator(
     }
 
     fun setScrollDepth(scrollDepth: Float) {
-        val dy = scrollDepth - 25.dp(context) - indicatorHeight / 2
+        val dy = scrollDepth - 75.dp(context) + touchDownY - indicatorHeight / 2
 
         y = dy.coerceAtLeast(5.dp(context).toFloat())
     }
