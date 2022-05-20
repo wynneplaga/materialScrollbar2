@@ -53,7 +53,7 @@ Additonal optional attributes:
 
 * msb_handleColor - Color
 * msb_textColor - Color
-* msb_indicatorType - Color
+* msb_indicatorType - Enum, see below
 
 ------
 
