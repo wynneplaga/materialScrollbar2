@@ -1,4 +1,4 @@
-[![Apache 2.0](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![](https://jitpack.io/v/wynneplaga/MaterialScrollbar2.svg)](https://jitpack.io/#turing-tech/MaterialScrollBar) [![Version](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialScrollbar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2441)
+[![Apache 2.0](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![](https://jitpack.io/v/wynneplaga/MaterialScrollbar2.svg)](https://jitpack.io/#wynneplaga/materialScrollbar2) [![Version](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialScrollbar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2441)
 
 An Android library that brings the Material Design scrollbar to all devices. Designed for Android's `recyclerView`.
 
