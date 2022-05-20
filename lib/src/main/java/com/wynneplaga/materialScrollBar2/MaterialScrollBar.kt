@@ -14,7 +14,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
-import androidx.core.view.NestedScrollingParent
 import androidx.core.view.doOnAttach
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
@@ -34,32 +33,10 @@ class MaterialScrollBar @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
     defStyleRes: Int = 0
-): RelativeLayout(context, attributeSet, defStyleAttr, defStyleRes), NestedScrollingParent {
+): RelativeLayout(context, attributeSet, defStyleAttr, defStyleRes) {
 
     private var handleTrack: View
     internal lateinit var handleThumb: Handle
-
-    override fun isNestedScrollingEnabled() = true
-
-    override fun startNestedScroll(axes: Int): Boolean {
-        return true
-    }
-
-    override fun dispatchNestedScroll(
-        dxConsumed: Int,
-        dyConsumed: Int,
-        dxUnconsumed: Int,
-        dyUnconsumed: Int,
-        offsetInWindow: IntArray?
-    ): Boolean {
-        return super.dispatchNestedScroll(
-            dxUnconsumed,
-            dyUnconsumed,
-            0,
-            0,
-            offsetInWindow
-        )
-    }
 
     var indicator: Indicator? = null
         set(value) {
