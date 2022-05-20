@@ -2,6 +2,7 @@ package com.wynneplaga.materialScrollBar2
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -15,6 +16,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.doOnAttach
+import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
@@ -106,6 +108,7 @@ class MaterialScrollBar @JvmOverloads constructor(
     ): this(context) {
         this.recyclerView = recyclerView
         recyclerView.addOnScrollListener(scrollListener)
+        recyclerView.adapter!!.registerAdapterDataObserver(adapterObserver)
         handleThumb.handleColor = handleColor
     }
 
@@ -126,7 +129,11 @@ class MaterialScrollBar @JvmOverloads constructor(
         doOnAttach {
             if (rvId != -1) {
                 recyclerView = (parent as ViewGroup).findViewById(rvId)
+                recyclerView.adapter!!.registerAdapterDataObserver(adapterObserver)
                 recyclerView.addOnScrollListener(scrollListener)
+            }
+            recyclerView.doOnLayout {
+                adapterObserver.onChanged()
             }
 
             if (indicator == null) {
@@ -235,6 +242,26 @@ class MaterialScrollBar @JvmOverloads constructor(
             fillAfter = true
             startAnimation(this)
         }
+    }
+
+    /**
+     * Whether the scroll bar should automatically hide and show itself depending on the number
+     * of items
+     */
+    var manageOwnVisibility = true
+
+    private val adapterObserver = object: RecyclerView.AdapterDataObserver() {
+
+        override fun onChanged() {
+            if (!manageOwnVisibility) return
+
+            visibility = if (scrollingUtilities.availableScrollHeight <= 0) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+        }
+
     }
 
     private inner class ScrollListener: RecyclerView.OnScrollListener() {

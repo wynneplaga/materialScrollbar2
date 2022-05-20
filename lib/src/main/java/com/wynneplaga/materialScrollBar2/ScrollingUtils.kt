@@ -68,7 +68,7 @@ internal class ScrollingUtilities(private val materialScrollBar: MaterialScrollB
                 scrollPosState.indicatorPosition
             }
             it.currentPosition = element
-            it.setScrollDepth(adjustedScrollDepthPx + materialScrollBar.top)
+            it.setScrollDepth(adjustedScrollDepthPx)
         }
     }
 
@@ -141,7 +141,7 @@ internal class ScrollingUtilities(private val materialScrollBar: MaterialScrollB
         updateScrollOfHandleAndIndicator()
     }
 
-    private val availableScrollHeight: Int
+    internal val availableScrollHeight: Int
         get() {
             val visibleHeight: Int = materialScrollBar.recyclerView.height
             val localAdapter = adapter
@@ -158,7 +158,7 @@ internal class ScrollingUtilities(private val materialScrollBar: MaterialScrollB
         scrollPosState.rowIndex = -1
         scrollPosState.rowTopOffset = -1
         scrollPosState.rowHeight = -1
-        if (materialScrollBar.recyclerView.getAdapter() == null) {
+        if (materialScrollBar.recyclerView.adapter == null) {
             Log.e(
                 "MaterialScrollBarLib", "The adapter for your recyclerView has not been set; " +
                         "skipping layout."
