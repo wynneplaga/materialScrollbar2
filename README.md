@@ -45,7 +45,7 @@ Simply add the following to your XML or instantiate it programtically:
     android:id="@+id/dragScrollBar"
     android:layout_width="wrap_content"
     app:msb_recyclerView="@id/recyclerView"
-    app:msb_indicatorType="alphabetic"
+    app:msb_indicatorType="alphabetic" <!--optional-->
     android:layout_height="match_parent" />
 ```
 
