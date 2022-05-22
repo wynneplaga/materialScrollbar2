@@ -143,6 +143,7 @@ internal class ScrollingUtilities(private val materialScrollBar: MaterialScrollB
 
     internal val availableScrollHeight: Int
         get() {
+            updateScrollPos()
             val visibleHeight: Int = materialScrollBar.recyclerView.height
             val localAdapter = adapter
             val scrollHeight = if (localAdapter is ICustomScroller) {

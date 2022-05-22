@@ -15,7 +15,6 @@ import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.doOnAttach
-import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
@@ -107,7 +106,7 @@ class MaterialScrollBar @JvmOverloads constructor(
     ): this(context) {
         this.recyclerView = recyclerView
         recyclerView.addOnScrollListener(scrollListener)
-        recyclerView.adapter!!.registerAdapterDataObserver(adapterObserver)
+        recyclerView.addOnChildAttachStateChangeListener(childAttachObserver)
         handleThumb.handleColor = handleColor
     }
 
@@ -128,12 +127,10 @@ class MaterialScrollBar @JvmOverloads constructor(
         doOnAttach {
             if (rvId != -1) {
                 recyclerView = (parent as ViewGroup).findViewById(rvId)
-                recyclerView.adapter!!.registerAdapterDataObserver(adapterObserver)
+                recyclerView.addOnChildAttachStateChangeListener(childAttachObserver)
                 recyclerView.addOnScrollListener(scrollListener)
             }
-            recyclerView.doOnLayout {
-                adapterObserver.onChanged()
-            }
+            childAttachObserver.updateBarVisibility()
 
             if (indicator == null) {
                 indicator = when (indicatorType) {
@@ -249,9 +246,9 @@ class MaterialScrollBar @JvmOverloads constructor(
      */
     var manageOwnVisibility = true
 
-    private val adapterObserver = object: RecyclerView.AdapterDataObserver() {
+    private val childAttachObserver = object: RecyclerView.OnChildAttachStateChangeListener {
 
-        override fun onChanged() {
+        fun updateBarVisibility() {
             if (!manageOwnVisibility) return
 
             visibility = if (scrollingUtilities.availableScrollHeight <= 0) {
@@ -261,9 +258,9 @@ class MaterialScrollBar @JvmOverloads constructor(
             }
         }
 
-        override fun onItemRangeChanged(positionStart: Int, itemCount: Int) = onChanged()
-        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) = onChanged()
-        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) = onChanged()
+        override fun onChildViewAttachedToWindow(view: View) = updateBarVisibility()
+
+        override fun onChildViewDetachedFromWindow(view: View) = updateBarVisibility()
 
     }
 
