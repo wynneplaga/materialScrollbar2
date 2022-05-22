@@ -2,7 +2,6 @@ package com.wynneplaga.materialScrollBar2
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -261,6 +260,10 @@ class MaterialScrollBar @JvmOverloads constructor(
                 View.VISIBLE
             }
         }
+
+        override fun onItemRangeChanged(positionStart: Int, itemCount: Int) = onChanged()
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) = onChanged()
+        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) = onChanged()
 
     }
 
