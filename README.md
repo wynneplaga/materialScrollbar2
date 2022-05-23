@@ -33,7 +33,7 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation 'com.github.wynneplaga:MaterialScrollbar2:1.0.0'
+    implementation 'com.github.wynneplaga:MaterialScrollbar2:1.0.5'
 }
 ```
 ### How to use
